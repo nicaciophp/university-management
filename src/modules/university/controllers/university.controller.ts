@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 import { QueryDto } from 'src/modules/shared/dtos/query.dto';
 import { CreateUniversityDto } from '../dtos/create-university.dto';
+import { UpdateUniversityDto } from '../dtos/update-university.dto';
 import { UniversityService } from '../services/university.service';
 
 @Controller('universities')
@@ -23,7 +24,18 @@ export class UniversityController {
     @UseGuards(JwtAuthGuard)
     @Get()
     public async findAll(@Query() query: QueryDto) {
-        console.log(query)
         return this.universityService.findAll(query);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get(':id')
+    public async findOne(@Param('id') id) {
+        return this.universityService.findOne(id);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Put(':id')
+    public async update(@Param('id') id, @Body() data: UpdateUniversityDto) {
+        return this.universityService.updateUniversity(data, id);
     }
 }

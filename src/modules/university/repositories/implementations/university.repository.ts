@@ -5,6 +5,7 @@ import { QueryDto } from "src/modules/shared/dtos/query.dto";
 import { IPaginatedData } from "src/modules/shared/models/paginated-data.interface";
 import { TCreateUniversity } from "../../models/create-university.type";
 import { University } from "../../models/university.model";
+import { TUpdateUniversity } from "../../models/update-university.type";
 import { IUniversity } from "../models/university.interface";
 
 @Injectable()
@@ -53,5 +54,17 @@ export class UniversityRepository implements IUniversity {
                 data: dataParse,
                 total
             }
+    }
+
+    public async findById(id: string): Promise<University> {
+        return await this.universityModel.findOne({_id: id })
+    }
+
+    public async update(data: TUpdateUniversity, id: string): Promise<void> {
+        await this.universityModel.updateOne({ _id: id }, { 
+            name: data.name,
+            domains: data.domains,
+            web_pages: data.web_pages,
+         })
     }
 }
