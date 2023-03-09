@@ -6,7 +6,7 @@ import { UniversityService } from '../services/university.service';
 export class UniversityController {
     constructor(private readonly universityService: UniversityService) {}
 
-    @Cron(CronExpression.EVERY_MINUTE)
+    @Cron(CronExpression.EVERY_DAY_AT_1AM)
     public async saveUniversity() {
         await this.universityService.saveUniversity();
     }
