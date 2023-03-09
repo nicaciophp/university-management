@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - /home/nicacio/Desenvolvimento/Docker/Volumes/MongoDB:/data/db
+    networks:
+      - university-management-network
+  dev:
+    image: university-management-api
+    build: .
+    command:
+      - /bin/bash
+      - -c
+      - |
+        npm install 
+        npm run start:dev
+    env_file: 
+      - .env
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+    networks:
+      - university-management-network
+
+networks: 
+    university-management-network:
+      driver: bridge
