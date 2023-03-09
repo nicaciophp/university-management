@@ -18,4 +18,12 @@ export class UserRepository implements IUser {
     public async findByEmail(email: string): Promise<User> {
         return await this.userModel.findOne({ email });
     }
+
+    public async findById(id: string): Promise<User> {
+        return await this.userModel.findOne({ _id: id });
+    }
+
+    public async changePassword(password: string, id: string): Promise<void> {
+        await this.userModel.updateOne({ _id: id }, { password })
+    } 
 }

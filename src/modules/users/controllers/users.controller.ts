@@ -1,4 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { IUserTokenDto } from 'src/modules/auth/dtos/user-token.dto';
+import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
+import { ChangePasswordDto } from '../dtos/change-password.dto';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { LoginCredentialsDto } from '../dtos/login-credentials.dto';
 import { UsersService } from '../services/users.service';
@@ -15,5 +18,12 @@ export class UsersController {
     @Post('login')
     public async login(@Body() data: LoginCredentialsDto) {
         return await this.userService.login(data);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Put('change-password')
+    public async changePassword(@Body() data: ChangePasswordDto, @Req() request) {
+        const user: IUserTokenDto = request.user;
+        return await this.userService.changePassword(data, user);
     }
 }

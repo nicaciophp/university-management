@@ -4,6 +4,8 @@ import { UserRepository } from '../repositories/implementations/user.repository'
 import * as bcrypt from 'bcrypt';
 import { LoginCredentialsDto } from '../dtos/login-credentials.dto';
 import { JwtService } from '@nestjs/jwt';
+import { IUserTokenDto } from 'src/modules/auth/dtos/user-token.dto';
+import { ChangePasswordDto } from '../dtos/change-password.dto';
 
 @Injectable()
 export class UsersService {
@@ -45,5 +47,17 @@ export class UsersService {
         return {
             access_token: this.jwtService.sign(payload),
           }
+    }
+
+    public async changePassword(data: ChangePasswordDto, user: IUserTokenDto) {
+        if(data.password != data.confirm_password) {
+            throw new BadRequestException('As senhas precisam ser iguais.');
+        }
+        const passwordEncrypted = await bcrypt.hash(data.password, 10);
+        try {
+            await this.userRepository.changePassword(passwordEncrypted, user.userId);
+        } catch (error) {
+            throw new BadRequestException(error.message)
+        }
     }
 }
