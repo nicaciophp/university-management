@@ -15,4 +15,5 @@ export interface IUniversity {
   '_id'>>>;
   findById(id: string): Promise<University>;
   update(data: TUpdateUniversity, id: string): Promise<void>;
+  delete(id: string): Promise<void>;
 }

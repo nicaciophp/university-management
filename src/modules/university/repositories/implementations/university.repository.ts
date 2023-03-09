@@ -65,6 +65,10 @@ export class UniversityRepository implements IUniversity {
             name: data.name,
             domains: data.domains,
             web_pages: data.web_pages,
-         })
+         });
+    }
+
+    public async delete(id: string): Promise<void> {
+        await this.universityModel.deleteOne({ _id: id })
     }
 }

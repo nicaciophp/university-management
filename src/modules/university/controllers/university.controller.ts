@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 import { QueryDto } from 'src/modules/shared/dtos/query.dto';
@@ -37,5 +37,11 @@ export class UniversityController {
     @Put(':id')
     public async update(@Param('id') id, @Body() data: UpdateUniversityDto) {
         return this.universityService.updateUniversity(data, id);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Delete(':id')
+    public async delete(@Param('id') id) {
+        return this.universityService.deleteUniversity(id);
     }
 }

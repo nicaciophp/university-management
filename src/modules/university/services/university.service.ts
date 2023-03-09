@@ -73,4 +73,8 @@ export class UniversityService {
             throw new BadRequestException(error.message);
         }
     }
+
+    public async deleteUniversity(id: string) {
+        await this.universityRepository.delete(id);
+    }
 }
