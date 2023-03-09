@@ -1,6 +1,7 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
+import { QueryDto } from 'src/modules/shared/dtos/query.dto';
 import { CreateUniversityDto } from '../dtos/create-university.dto';
 import { UniversityService } from '../services/university.service';
 
@@ -17,5 +18,12 @@ export class UniversityController {
     @Post()
     public async createUniversity(@Body() data: CreateUniversityDto) {
         await this.universityService.createUniversity(data);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get()
+    public async findAll(@Query() query: QueryDto) {
+        console.log(query)
+        return this.universityService.findAll(query);
     }
 }

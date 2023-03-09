@@ -1,4 +1,5 @@
 import { BadGatewayException, BadRequestException, Injectable } from '@nestjs/common';
+import { QueryDto } from 'src/modules/shared/dtos/query.dto';
 import { CreateUniversityDto } from '../dtos/create-university.dto';
 import { HipolabsApiInterface } from '../interfaces/hipolabs-api.interface';
 import { ApiUniversityHipoLabs } from '../providers/university-hipolabs-api.provider';
@@ -54,5 +55,9 @@ export class UniversityService {
         } catch (error) {
             throw new BadRequestException(error.message);
         }
+    }
+
+    public async findAll(query: QueryDto) {
+        return await this.universityRepository.findAll(query);
     }
 }

@@ -1,4 +1,5 @@
 export class University {
+    _id: string;
     'state-province': string;
     domains: string[];
     country: string;
