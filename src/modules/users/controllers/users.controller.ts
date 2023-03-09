@@ -1,4 +1,5 @@
 import { Body, Controller, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { IUserTokenDto } from 'src/modules/auth/dtos/user-token.dto';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 import { ChangePasswordDto } from '../dtos/change-password.dto';
@@ -6,6 +7,7 @@ import { CreateUserDto } from '../dtos/create-user.dto';
 import { LoginCredentialsDto } from '../dtos/login-credentials.dto';
 import { UsersService } from '../services/users.service';
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) {}
