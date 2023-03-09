@@ -1,0 +1,2 @@
+MONGO='mongodb://user:user@172.17.0.1:27018/university'
+JWT_SECRET='f22a6059c1f769279e6e440649b5a11039f6a5a0'

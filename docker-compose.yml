@@ -4,12 +4,13 @@ services:
   mongo:
     image: mongo
     environment:
+      MONGO_INITDB_DATABASE: university
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: mongo
     ports:
       - "27018:27017"
     volumes:
-      - /home/nicacio/Desenvolvimento/Docker/Volumes/MongoDB:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - university-management-network
   dev:
