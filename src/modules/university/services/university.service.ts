@@ -49,7 +49,7 @@ export class UniversityService {
             data.name
         );
         if(!!universityExists) {
-            throw new BadGatewayException('Universidade já existe.');
+            throw new BadRequestException('Universidade já existe.');
         }
         try {
             await this.universityRepository.create(data);

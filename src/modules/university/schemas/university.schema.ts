@@ -34,7 +34,11 @@ const UniversitySchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: false
-    }
+    },
+    updated_at: {
+      type: Date,
+      trim: true,
+    },
 });
 
 export {UniversitySchema }

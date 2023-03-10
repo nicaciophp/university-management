@@ -65,6 +65,7 @@ export class UniversityRepository implements IUniversity {
             name: data.name,
             domains: data.domains,
             web_pages: data.web_pages,
+            updated_at: new Date()
          });
     }
 
