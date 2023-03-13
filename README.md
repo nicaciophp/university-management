@@ -19,3 +19,6 @@ para EVERY_30_SECONDS e rodar o build novamente do docker.
 ## Env
 Necessário criar um arquivo .env na raiz do projeto. Pegar o env-example como base.
 
+## Servidor
+http://localhost:3000
+
