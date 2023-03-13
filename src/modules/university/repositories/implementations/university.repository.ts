@@ -52,7 +52,7 @@ export class UniversityRepository implements IUniversity {
 
             return {
                 data: dataParse,
-                total: Math.ceil(total / query.limit),
+                totalPages: Math.ceil(total / query.limit),
             }
     }
 
