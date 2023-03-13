@@ -1,8 +1,8 @@
-## Description
+## Descrição
 
 Necessário ter o [Docker](https://docs.docker.com/engine/install/) instalado.
 
-## Installation
+## Instalação
 
 ```bash
 $ docker compose up -d --build
